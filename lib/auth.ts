@@ -9,6 +9,7 @@ export interface User {
   name: string;
   mobile: string;
   email?: string;
+  password: string;
   role: 'super_admin' | 'admin' | 'guest';
   is_verified: boolean;
 }

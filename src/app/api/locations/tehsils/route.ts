@@ -8,7 +8,11 @@ export async function GET(request: NextRequest) {
 
     const client = await pool.connect();
     try {
-      let query, params;
+    //  let query, params;
+       let query: string;
+      let params: (string | number)[] = []; // ✅ explicitly typed
+
+    
       if (districtId) {
         query = `
           SELECT t.*, d.name as district_name 

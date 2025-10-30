@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getUserByEmail, verifyPassword } from '../../../../../lib/auth';
 import { generateOTP } from '../../../../../lib/otp';
 
+interface user {
+  email: string;
+  mobile: string;
+  password: string;
+}
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
@@ -22,9 +27,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify password
-  console.log("password->",password);
-  console.log("password->",user.password);
   
     const isValidPassword = await verifyPassword(password, user.password);
     if (!isValidPassword) {
