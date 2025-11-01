@@ -1,6 +1,3 @@
--- Create database (run this in pgAdmin)
--- CREATE DATABASE user_management;
-
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -54,56 +51,10 @@ CREATE TABLE IF NOT EXISTS grh_sampar_forms (
     mobile VARCHAR(15) NOT NULL,
     hobby TEXT,
     location TEXT,
+    work TEXT,
+    description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
--- Insert default districts
-INSERT INTO districts (name) VALUES 
-('Nagaur'),
-('Merta'),
-('Didwana')
-ON CONFLICT DO NOTHING;
-
--- Insert tehsils for Nagaur
-INSERT INTO tehsils (name, district_id) VALUES 
-('Nagaur', 1),
-('Merta', 1),
-('Didwana', 1),
-('Parbatsar', 1),
-('Makrana', 1)
-ON CONFLICT DO NOTHING;
-
--- Insert tehsils for Merta
-INSERT INTO tehsils (name, district_id) VALUES 
-('Merta', 2),
-('Degana', 2),
-('Jayal', 2)
-ON CONFLICT DO NOTHING;
-
--- Insert tehsils for Didwana
-INSERT INTO tehsils (name, district_id) VALUES 
-('Didwana', 3),
-('Ladnun', 3),
-('Nokha', 3)
-ON CONFLICT DO NOTHING;
-
--- Insert mandals (example for Nagaur tehsil)
-INSERT INTO mandals (name, tehsil_id) VALUES 
-('Mandal 1', 1),
-('Mandal 2', 1),
-('Mandal 3', 1),
-('Mandal 4', 1),
-('Mandal 5', 1),
-('Mandal 6', 1),
-('Mandal 7', 1),
-('Mandal 8', 1),
-('Mandal 9', 1),
-('Mandal 10', 1),
-('Mandal 11', 1),
-('Mandal 12', 1),
-('Mandal 13', 1),
-('Mandal 14', 1)
-ON CONFLICT DO NOTHING;
 
 -- Vitrit Savaymsevak table
 CREATE TABLE IF NOT EXISTS vitrit_savaymsevak (
@@ -115,9 +66,197 @@ CREATE TABLE IF NOT EXISTS vitrit_savaymsevak (
     age INTEGER NOT NULL,
     class_profession_hindi VARCHAR(255) NOT NULL,
     responsibility_hindi VARCHAR(255) NOT NULL,
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    responsibility_details_hindi TEXT,
+    sangh_shikshan_hindi VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Campaign Team (Abhiyan Toli) table
+CREATE TABLE IF NOT EXISTS campaign_teams (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    location VARCHAR(255),
+    team_number INTEGER,
+    team_leader VARCHAR(255),
+    leader_phone VARCHAR(15),
+    assistant_leader VARCHAR(255),
+    assistant_phone VARCHAR(15),
+    member1 VARCHAR(255),
+    member1_phone VARCHAR(15),
+    member2 VARCHAR(255),
+    member2_phone VARCHAR(15),
+    member3 VARCHAR(255),
+    member3_phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Mandal Team table
+CREATE TABLE IF NOT EXISTS mandal_teams (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    mandal_leader VARCHAR(255),
+    leader_phone VARCHAR(15),
+    mandal_secretary VARCHAR(255),
+    secretary_phone VARCHAR(15),
+    member1 VARCHAR(255),
+    member1_phone VARCHAR(15),
+    member2 VARCHAR(255),
+    member2_phone VARCHAR(15),
+    member3 VARCHAR(255),
+    member3_phone VARCHAR(15),
+    member4 VARCHAR(255),
+    member4_phone VARCHAR(15),
+    member5 VARCHAR(255),
+    member5_phone VARCHAR(15),
+    member6 VARCHAR(255),
+    member6_phone VARCHAR(15),
+    member7 VARCHAR(255),
+    member7_phone VARCHAR(15),
+    member8 VARCHAR(255),
+    member8_phone VARCHAR(15),
+    member9 VARCHAR(255),
+    member9_phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert default districts
+INSERT INTO districts (name) VALUES 
+('ग्वालियर'),
+('भिंड'),
+('शिवपुरी'),
+('गुना'),
+('अशोकनगर'),
+('सीहोर'),
+('रतलाम'),
+('उज्जैन'),
+('मंदसौर'),
+('नीमच'),
+('मध्यपुरी'),
+('दतिया'),
+('शाजापुर'),
+('अलीराजपुर'),
+('बड़वानी'),
+('खरगोन'),
+('बरवानी'),
+('धार'),
+('इंदौर'),
+('बैतूल'),
+('छिंदवाड़ा'),
+('होशंगाबाद'),
+('सीहोर'),
+('रायसेन'),
+('आगर मालवा'),
+('राजगढ़'),
+('विदिशा'),
+('सागर'),
+('दमोह'),
+('चतरपुर'),
+('टीकमगढ़'),
+('पन्ना'),
+('सतना'),
+('रीवा'),
+('सिवानी'),
+('भोपाल'),
+('हरदा'),
+('बेतूल'),
+('अमरोहा'),
+('मुरैनां'),
+('शाहडोल'),
+('सिंहगढ़'),
+('अगरतला'),
+('जबलपुर'),
+('नरसिंहपुर'),
+('कटनी'),
+('उमरिया'),
+('अनूपपुर'),
+('डिंडोरी'),
+('मंडला'),
+('बालाघाट'),
+('सेहोर'),
+('सिरमौर'),
+('सीकर'),
+('धौलपुर')
+ON CONFLICT DO NOTHING;
+
+-- Insert tehsils for Gwalior district (district_id = 1)
+INSERT INTO tehsils (name, district_id) VALUES 
+('ग्वालियर', 1),
+('दोहा', 1),
+('पचमढ़ी', 1),
+('सागर', 1),
+('बेरचा', 1),
+('लाहर', 1),
+('भिटार', 1),
+('चंदेरी', 1),
+('महाराजपुर', 1),
+('मेहगांव', 1),
+('बावरी', 1),
+('गुरुवारा', 1),
+('हरदेहाट', 1),
+('इंदौर', 1),
+('कामरा', 1),
+('गोरावा', 1),
+('सिवनी', 1),
+('करवा', 1),
+('सरोजनीनगर', 1),
+('मानवार', 1),
+('सालरीगंज', 1),
+('मालगढ़', 1),
+('कोटरा', 1),
+('गोपाद्री', 1),
+('कालापीपल', 1),
+('कुलुम', 1),
+('बाबरी', 1),
+('चौचौरा', 1),
+('मुरार', 1),
+('मालवा', 1),
+('महाराजगंज', 1),
+('भानपुरा', 1),
+('शिवराजपुर', 1),
+('शिवपुरी', 1),
+('शाहपुरा', 1),
+('सुखचीरा', 1),
+('रामचंद्रपुर', 1),
+('सागरी', 1)
+ON CONFLICT DO NOTHING;
+
+-- Insert mandals for Gwalior tehsil (tehsil_id = 1)
+INSERT INTO mandals (name, tehsil_id) VALUES 
+('ग्वालियर नगर', 1),
+('मालवा नगर', 1),
+('सिवनी मंडी', 1),
+('करवा', 1),
+('सरोजनीनगर', 1),
+('मानवार', 1),
+('सालरीगंज', 1),
+('मालगढ़', 1),
+('कोटरा', 1),
+('गोपाद्री', 1),
+('कालापीपल', 1),
+('कुलुम', 1),
+('बाबरी', 1),
+('चौचौरा', 1),
+('मुरार', 1),
+('मालवा', 1),
+('महाराजगंज', 1),
+('भानपुरा', 1),
+('शिवराजपुर', 1),
+('शिवपुरी', 1),
+('शाहपुरा', 1),
+('सुखचीरा', 1),
+('रामचंद्रपुर', 1),
+('सागरी', 1)
+ON CONFLICT DO NOTHING;
 
 -- Create super admin user (password: 123456789)
 INSERT INTO users (name, mobile, email, password, role, is_verified) VALUES 

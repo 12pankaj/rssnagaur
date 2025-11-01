@@ -84,3 +84,35 @@ export async function getAllUsers(): Promise<User[]> {
     client.release();
   }
 }
+
+// New function to update user details
+export async function updateUserDetails(userId: number, name: string, mobile: string, email: string | null, password: string | null, role: string): Promise<void> {
+  const client = await pool.connect();
+  try {
+    let query = 'UPDATE users SET name = $1, mobile = $2, email = $3, role = $4, updated_at = CURRENT_TIMESTAMP';
+    let params: any[] = [name, mobile, email, role];
+    
+    if (password) {
+      const hashedPassword = await hashPassword(password);
+      query += `, password = $${params.length + 1}`;
+      params.push(hashedPassword);
+    }
+    
+    query += ` WHERE id = $${params.length + 1}`;
+    params.push(userId.toString());
+    
+    await client.query(query, params);
+  } finally {
+    client.release();
+  }
+}
+
+// New function to delete a user
+export async function deleteUser(userId: number): Promise<void> {
+  const client = await pool.connect();
+  try {
+    await client.query('DELETE FROM users WHERE id = $1', [userId.toString()]);
+  } finally {
+    client.release();
+  }
+}

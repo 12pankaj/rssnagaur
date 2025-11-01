@@ -43,6 +43,8 @@ export default function Layout({ children }: LayoutProps) {
         return [
           ...baseItems,
           { href: '/grh-sampar', label: 'गृह सम्पर्क अभियान', icon: '📝' },
+          { href: '/campaign-team', label: 'अभियान टोली', icon: '📝' },
+          { href: '/mandal-team', label: 'मण्डल टोली', icon: '📝' },
           { href: '/vitrit-savaymsevak', label: 'स्वयंसेवक विस्तृत सूची', icon: '🤝' },
         ];
       default:
