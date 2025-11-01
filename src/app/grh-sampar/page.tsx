@@ -125,44 +125,44 @@ const responsibilityOptions = [
     if (!validateForm()) {
       return;
     }
-console.log("ogdof");
+//console.log("ogdof");
 
-//    setIsSubmitting(true);
+ setIsSubmitting(true);
 
-    // try {
-    //   const formData = forms.map(form => ({
-    //     districtId: parseInt(selectedDistrict),
-    //     tehsilId: parseInt(selectedTehsil),
-    //     mandalId: parseInt(selectedMandal),
-    //     name: form.name,
-    //     mobile: form.mobile,
-    //     hobby: form.hobby,
-    //     location: form.location,
-    //     work: form.work,
-    //     description: form.description
-    //   }));
+    try {
+      const formData = forms.map(form => ({
+        districtId: parseInt(selectedDistrict),
+        tehsilId: parseInt(selectedTehsil),
+        mandalId: parseInt(selectedMandal),
+        name: form.name,
+        mobile: form.mobile,
+        hobby: form.hobby,
+        location: form.location,
+        work: form.work,
+        description: form.description
+      }));
 
-    //   const response = await fetch('/api/forms/grh-sampar', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Authorization': `Bearer ${token}`,
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ forms: formData })
-    //   });
+      const response = await fetch('/api/forms/grh-sampar', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ forms: formData })
+      });
 
-    //   if (response.ok) {
-    //     toast.success('Forms submitted successfully!');
-    //     router.push('/dashboard');
-    //   } else {
-    //     const data = await response.json();
-    //     toast.error(data.error || 'Failed to submit forms');
-    //   }
-    // } catch (error) {
-    //   toast.error('Error submitting forms');
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      if (response.ok) {
+        toast.success('Forms submitted successfully!');
+        router.push('/dashboard');
+      } else {
+        const data = await response.json();
+        toast.error(data.error || 'Failed to submit forms');
+      }
+    } catch (error) {
+      toast.error('Error submitting forms');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isAuthenticated || user?.role !== 'guest') {

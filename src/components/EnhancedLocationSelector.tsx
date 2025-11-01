@@ -112,7 +112,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
 
   const handleNext = () => {
     if (!selectedDistrict || !selectedTehsil || !selectedMandal) {
-      toast.error('Please select district, tehsil, and mandal');
+      toast.error('Please select जिला, खण्ड/नगर, and मण्डल/बस्ती');
       return;
     }
     onNext();
@@ -125,7 +125,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">जिला</label>
             <select
               value={selectedDistrict}
               onChange={handleDistrictChange}
@@ -139,7 +139,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Tehsil</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">खण्ड/नगर</label>
             <select
               value={selectedTehsil}
               onChange={handleTehsilChange}
@@ -154,7 +154,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Mandal</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">मण्डल/बस्ती</label>
             <select
               value={selectedMandal}
               onChange={handleMandalChange}
