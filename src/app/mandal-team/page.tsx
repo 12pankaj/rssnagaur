@@ -169,7 +169,7 @@ export default function MandalTeamForm() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white shadow rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">मण्डल टीम विवरण</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">मण्डल टोली विवरण</h1>
         
         {/* {currentStep === 1 && (
         //   <CommonLocationSelector 
@@ -188,18 +188,18 @@ export default function MandalTeamForm() {
         {currentStep === 2 && (
           <div className="space-y-6">
             <div className="bg-green-50 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold text-green-800 mb-4">चरण 2: टीम विवरण भरें</h2>
+              <h2 className="text-lg font-semibold text-green-800 mb-4">चरण 2: मण्डल टोली विवरण भरें</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">मण्डल प्रमुख *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">मण्डल पालक  *</label>
                   <input
                     type="text"
                     name="mandal_leader"
                     value={team.mandal_leader}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                    placeholder="मण्डल प्रमुख का नाम दर्ज करें"
+                    placeholder="मण्डल पालक का नाम दर्ज करें"
                     required
                   />
                 </div>
@@ -212,20 +212,20 @@ export default function MandalTeamForm() {
                     value={team.leader_phone}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                    placeholder="मण्डल प्रमुख का फ़ोन नंबर दर्ज करें"
+                    placeholder="मण्डल पालक का फ़ोन नंबर दर्ज करें"
                     required
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">मण्डल सचिव *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">मण्डल कार्यवाह *</label>
                   <input
                     type="text"
                     name="mandal_secretary"
                     value={team.mandal_secretary}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                    placeholder="मण्डल सचिव का नाम दर्ज करें"
+                    placeholder="मण्डल कार्यवाह का नाम दर्ज करें"
                   />
                 </div>
                 
@@ -237,16 +237,18 @@ export default function MandalTeamForm() {
                     value={team.secretary_phone}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                    placeholder="मण्डल सचिव का फ़ोन नंबर दर्ज करें"
+                    placeholder="मण्डल कार्यवाह का फ़ोन नंबर दर्ज करें"
                   />
                 </div>
               </div>
               
               <div className="mb-4">
-                <h3 className="text-md font-semibold text-gray-800 mb-3">टीम के सदस्य * (कम से कम 5)</h3>
+                <h3 className="text-md font-semibold text-gray-800 mb-3">टोली के सदस्य * (कम से कम 5)</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
                     <div key={i} className="grid grid-cols-1 gap-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">सदस्य {i} (सहयोगी)</label>
+                     
                       <input
                         type="text"
                         name={`member${i}`}
@@ -255,6 +257,8 @@ export default function MandalTeamForm() {
                         className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
                         placeholder={`सदस्य ${i} का नाम`}
                       />
+                      
+                      <label className="block text-sm font-medium text-gray-700 mb-2">दूरभाष *</label>
                       <input
                         type="tel"
                         name={`member${i}_phone`}

@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import GrhSamparReport from '@/components/reports/GrhSamparReport';
 import VitritSavaymsevakReport from '@/components/reports/VitritSavaymsevakReport';
+import MandalTeamsReport from '@/components/reports/MandalTeamsReport';
+import CampaignTeamsReport from '@/components/reports/CampaignTeamsReport';
 
-type ReportType = 'dashboard' | 'grh-sampar' | 'vitrit-savaymsevak';
+type ReportType = 'dashboard' | 'grh-sampar' | 'vitrit-savaymsevak' | 'mandal-teams' | 'campaign-teams';
 
 export default function Reports() {
   const { user, isAuthenticated } = useAuth();
@@ -42,7 +44,7 @@ export default function Reports() {
     {
       id: 'grh-sampar',
       title: 'गृह सम्पर्क अभियान रिपोर्ट',
-      subtitle: 'Grh Sampar Form Report',
+      subtitle: '',
       icon: (
         <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -51,12 +53,12 @@ export default function Reports() {
       bgColor: 'bg-blue-50',
       iconBgColor: 'bg-blue-100',
       textColor: 'text-blue-600',
-      description: 'View and analyze Grh Sampar form submissions with location-based filtering.'
+      description: ''
     },
     {
       id: 'vitrit-savaymsevak',
       title: 'स्वयंसेवक विस्तृत सूची रिपोर्ट',
-      subtitle: 'Vitrit Savaymsevak Report',
+      subtitle: '',
       icon: (
         <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -65,7 +67,35 @@ export default function Reports() {
       bgColor: 'bg-green-50',
       iconBgColor: 'bg-green-100',
       textColor: 'text-green-600',
-      description: 'View and analyze Vitrit Savaymsevak volunteer data with search and filter options.'
+      description: ''
+    },
+    {
+      id: 'mandal-teams',
+      title: 'गृह सम्पर्क मण्डल टोली रिपोर्ट',
+      subtitle: '',
+      icon: (
+        <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      ),
+      bgColor: 'bg-purple-50',
+      iconBgColor: 'bg-purple-100',
+      textColor: 'text-purple-600',
+      description: ''
+    },
+    {
+      id: 'campaign-teams',
+      title: 'गृह सम्पर्क अभियान टोली रिपोर्ट',
+      subtitle: '',
+      icon: (
+        <svg className="w-12 h-12 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      ),
+      bgColor: 'bg-orange-50',
+      iconBgColor: 'bg-orange-100',
+      textColor: 'text-orange-600',
+      description: ''
     }
   ];
 
@@ -75,6 +105,10 @@ export default function Reports() {
         return <GrhSamparReport />;
       case 'vitrit-savaymsevak':
         return <VitritSavaymsevakReport />;
+      case 'mandal-teams':
+        return <MandalTeamsReport />;
+      case 'campaign-teams':
+        return <CampaignTeamsReport />;
       default:
         return (
         <div className="p-6 space-y-6">
@@ -142,7 +176,10 @@ export default function Reports() {
               Back to Reports Dashboard
             </button>
             <h2 className="text-xl font-bold text-gray-900">
-              {activeReport === 'grh-sampar' ? 'गृह सम्पर्क अभियान रिपोर्ट' : 'स्वयंसेवक विस्तृत सूची रिपोर्ट'}
+              {activeReport === 'grh-sampar' ? 'गृह सम्पर्क अभियान रिपोर्ट' : 
+               activeReport === 'vitrit-savaymsevak' ? 'स्वयंसेवक विस्तृत सूची रिपोर्ट' :
+               activeReport === 'mandal-teams' ? 'मण्डल टोली रिपोर्ट' :
+               'गृह सम्पर्क अभियान टोली रिपोर्ट'}
             </h2>
           </div>
         </div>

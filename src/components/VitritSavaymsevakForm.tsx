@@ -43,7 +43,7 @@ interface Mandal {
 }
 
 const responsibilityOptions = [
-  'संग में दायित्व',
+  'संघ में दायित्व',
   'विविध संगठन में दायित्व',
   'कोई दायित्व नहीं'
 ];

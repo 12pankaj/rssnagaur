@@ -131,7 +131,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
               onChange={handleDistrictChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
             >
-              <option value="">Select District</option>
+              <option value="">जिला चुनें</option>
               {districts.map((district) => (
                 <option key={district.id} value={district.id}>{district.name}</option>
               ))}
@@ -146,7 +146,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
               disabled={!selectedDistrict}
             >
-              <option value="">Select Tehsil</option>
+              <option value="">खण्ड/नगर चुनें</option>
               {tehsils.map((tehsil) => (
                 <option key={tehsil.id} value={tehsil.id}>{tehsil.name}</option>
               ))}
@@ -161,7 +161,7 @@ export default function EnhancedLocationSelector({ onLocationChange, onNext }: E
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
               disabled={!selectedTehsil}
             >
-              <option value="">Select Mandal</option>
+              <option value="">मण्डल/बस्ती चुनें</option>
               {mandals.map((mandal) => (
                 <option key={mandal.id} value={mandal.id}>{mandal.name}</option>
               ))}
