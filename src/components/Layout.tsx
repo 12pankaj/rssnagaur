@@ -79,12 +79,12 @@ export default function Layout({ children }: LayoutProps) {
                 <div className="flex items-center space-x-1">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-medium">
-                      {user.name.charAt(0).toUpperCase()}
+                      {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </span>
                   </div>
                   <div className="text-sm">
                     <p className="font-medium text-gray-900">{user.name}</p>
-                    <p className="text-gray-500 capitalize">{user.role.replace('_', ' ')}</p>
+                    <p className="text-gray-500 capitalize">{user?.role?.replace('_', ' ')}</p>
                   </div>
                 </div>
                 <button
@@ -133,12 +133,12 @@ export default function Layout({ children }: LayoutProps) {
                 <div className="flex items-center space-x-3 px-4 py-3">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-medium">
-                      {user.name.charAt(0).toUpperCase()}
+                      {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </span>
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-gray-900">{user.name}</p>
-                    <p className="text-sm text-gray-500 capitalize">{user.role.replace('_', ' ')}</p>
+                    <p className="text-sm text-gray-500 capitalize">{user?.role ? user.role.replace('_', ' ') : ''}</p>
                   </div>
                 </div>
                 <button

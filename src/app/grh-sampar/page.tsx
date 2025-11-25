@@ -28,12 +28,12 @@ export default function GrhSamparForm() {
   const [selectedTehsil, setSelectedTehsil] = useState('');
   const [selectedMandal, setSelectedMandal] = useState('');
   
-  const [forms, setForms] = useState<FormData[]>([{ name: '', mobile: '', hobby: '', location: '', work: '', description: '' }]);
+  const [forms, setForms] = useState<FormData[]>([{ name: '', mobile: '', hobby: 'अभिरुचि चयन करे', location: '', work: '', description: '' }]);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 const responsibilityOptions = [
-  
+  'अभिरुचि चयन करे',
   'Join RSS',
   'पर्यावरण संरक्षण',
   'गौ सेवा',
@@ -54,7 +54,7 @@ const responsibilityOptions = [
   }, [isAuthenticated, user, router]);
 
   const addForm = () => {
-    setForms([...forms, { name: '', mobile: '', hobby: 'Join RSS', location: '', work: '', description: '' }]);
+    setForms([...forms, { name: '', mobile: '', hobby: 'अभिरुचि चयन करे', location: '', work: '', description: '' }]);
   };
 
   const updateForm = (index: number, field: keyof FormData, value: string) => {
@@ -107,10 +107,12 @@ const responsibilityOptions = [
         toast.error('कार्य/व्यवसाय आवश्यक है');
         return false;
       }
-      if (!form.hobby.trim()) {
-        form.hobby='Join RSS';
-        // toast.error('अभिरुचि आवश्यक है');
-        // return false;
+      console.log("form.hobby.trim()000 >",form.hobby.trim());
+      
+      if (form.hobby.trim() === 'अभिरुचि चयन करे') {
+        // form.hobby='Join RSS';
+        toast.error('अभिरुचि आवश्यक है');
+        return false;
       }
     }
     return true;
@@ -282,7 +284,7 @@ const responsibilityOptions = [
                         value={form.description}
                         onChange={(e) => updateForm(index, 'description', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                        placeholder="विशेष विवरण दर्ज करें"
+                        placeholder="विशेष विवरण (टिप्पणी) दर्ज करें"
                         rows={3}
                         required
                       />
@@ -303,7 +305,7 @@ const responsibilityOptions = [
                   disabled={isSubmitting}
                    className=" flex-1 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
           >
-                  {isSubmitting ? 'सहेजा जा रहा है...' : 'सभी प्रविष्टियाँ सहेजें'}
+                  {isSubmitting ? 'सेव कर रहे हैं...' : 'सभी प्रविष्टियाँ सेव करे'}
                 </button>
               </div>
             </div>

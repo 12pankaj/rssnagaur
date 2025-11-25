@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import CommonLocationSelector from '@/components/CommonLocationSelector';
 import EnhancedLocationSelector from './EnhancedLocationSelector';
@@ -65,6 +66,7 @@ const initialFormData: VitritSavaymsevakData = {
 
 export default function VitritSavaymsevakForm() {
   const { user } = useAuth();
+   const router = useRouter();
   const [step, setStep] = useState(1); // 1 for location selection, 2 for multiple entries
   const [selectedLocation, setSelectedLocation] = useState({
     district_id: '',
@@ -303,8 +305,9 @@ export default function VitritSavaymsevakForm() {
 
       if (response.ok) {
         toast.success('डेटा सफलतापूर्वक सहेजा गया');
-        setExistingEntries(formEntries);
-        setIsEditing(true);
+    router.push('/dashboard');
+        // setExistingEntries(formEntries);
+        // setIsEditing(true);
       } else {
         toast.error(data.error || 'एक त्रुटि हुई');
       }
@@ -355,7 +358,7 @@ export default function VitritSavaymsevakForm() {
           </div>
         </div>
 
-        {existingEntries.length > 0 && step === 1 && !isEditing && (
+        {/* {existingEntries.length > 0 && step === 1 && !isEditing && (
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
             <div className="flex justify-between items-center">
               <p className="text-blue-700">आपका डेटा पहले से सहेजा गया है।</p>
@@ -367,7 +370,7 @@ export default function VitritSavaymsevakForm() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Step 1: Location Selection */}
@@ -638,7 +641,7 @@ export default function VitritSavaymsevakForm() {
                     disabled={isLoading}
                     className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
                   >
-                    {isLoading ? 'सहेजा जा रहा है...' : (isEditing ? 'अपडेट करें' : 'सहेजें')}
+                    {isLoading ? 'सहेजा जा रहा है...' : (isEditing ? 'अपडेट करें' : 'सेव करें')}
                   </button>
                 </div>
               </div>

@@ -262,3 +262,55 @@ ON CONFLICT DO NOTHING;
 INSERT INTO users (name, mobile, email, password, role, is_verified) VALUES 
 ('Super Admin', '9999999999', 'admin@example.com', '$2b$10$rQZ8K9LmN3pO4qR5sT6uVeWxYzA1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q', 'super_admin', true)
 ON CONFLICT (mobile) DO NOTHING;
+
+-- Program Events table
+CREATE TABLE IF NOT EXISTS program_events (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    total_villages INTEGER,
+    contacted_villages INTEGER,
+    distributed_forms INTEGER,
+    distributed_stickers INTEGER,
+    book_sales INTEGER,
+    contact_teams INTEGER,
+    contact_workers INTEGER,
+    male INTEGER,
+    female INTEGER,
+    yoga INTEGER,
+    special_contacts INTEGER,
+    swayamsevak_houses INTEGER,
+    supporter_houses INTEGER,
+    neutral_houses INTEGER,
+    total_houses INTEGER,
+    contacted_houses INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Vayapak Grh Sampark table
+CREATE TABLE IF NOT EXISTS vayapak_grh_sampark (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    total_villages INTEGER,
+    contacted_villages INTEGER,
+    distributed_forms INTEGER,
+    distributed_stickers INTEGER,
+    book_sales INTEGER,
+    contact_teams INTEGER,
+    contact_workers INTEGER,
+    male INTEGER,
+    female INTEGER,
+    yoga INTEGER,
+    special_contacts INTEGER,
+    swayamsevak_houses INTEGER,
+    supporter_houses INTEGER,
+    neutral_houses INTEGER,
+    total_houses INTEGER,
+    contacted_houses INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

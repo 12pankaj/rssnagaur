@@ -338,7 +338,7 @@ export default function userList() {
                           ? 'bg-blue-100 text-blue-800'
                           : 'bg-gray-100 text-gray-800'
                       }`}>
-                        {user.role.replace('_', ' ').toUpperCase()}
+                        {user.role ? user.role.replace('_', ' ').toUpperCase() : ''}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
