@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const tehsilId = searchParams.get('tehsilId');
     
-    let query = 'SELECT id, name, tehsil_id FROM mandals';
+    let query = 'SELECT mandals.id, mandals.name, tehsil_id, districts.name as district_name, tehsils.name as tehsil_name FROM mandals join tehsils on mandals.tehsil_id = tehsils.id join districts on tehsils.district_id = districts.id';
     let params: any[] = [];
     
     if (tehsilId) {

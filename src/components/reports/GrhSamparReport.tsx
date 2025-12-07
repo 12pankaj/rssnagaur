@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import toast from 'react-hot-toast';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 interface FormData {
   id: number;
@@ -132,6 +136,99 @@ export default function GrhSamparReport() {
     });
   };
 
+  const exportToCSV = () => {
+    const csvContent = [
+      // Header row
+      [
+        'ID', 'User', 'Name', 'Mobile', 'Location', 'District', 'Tehsil', 'Mandal', 'Hobby', 'Created At'
+      ],
+      // Data rows
+      ...forms.map(form => [
+        form.id, form.user_name, form.name, form.mobile, form.location || 'N/A',
+        form.district_name, form.tehsil_name, form.mandal_name, form.hobby || 'N/A',
+        new Date(form.created_at).toLocaleDateString()
+      ])
+    ];
+
+    const csvString = csvContent.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'grh-sampar-report.csv');
+    toast.success('CSV exported successfully');
+  };
+
+  const exportToExcel = () => {
+    const worksheetData = forms.map(form => ({
+      'ID': form.id,
+      'User': form.user_name,
+      'Name': form.name,
+      'Mobile': form.mobile,
+      'Location': form.location || 'N/A',
+      'District': form.district_name,
+      'Tehsil': form.tehsil_name,
+      'Mandal': form.mandal_name,
+      'Hobby': form.hobby || 'N/A',
+      'Created At': new Date(form.created_at).toLocaleDateString()
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Grh Sampar Report');
+    XLSX.writeFile(workbook, 'grh-sampar-report.xlsx');
+    toast.success('Excel exported successfully');
+  };
+
+  // const exportToPDF = () => {
+  //   const doc = new jsPDF();
+  //   
+  //   // Add title
+  //   doc.setFontSize(18);
+  //   doc.text('गृह सम्पर्क अभियान रिपोर्ट', 14, 20);
+  //   doc.setFontSize(12);
+  //   doc.text('Grh Sampar Form Data Report', 14, 24);
+  //   
+  //   // Add generation date
+  //   const date = new Date().toLocaleDateString('hi-IN');
+  //   doc.setFontSize(10);
+  //   doc.text(`रिपोर्ट जनरेशन दिनांक: ${date}`, 14, 30);
+  //   
+  //   // Prepare table data
+  //   const tableColumn = [
+  //     'ID', 'User', 'Name', 'Mobile', 'Location', 'District', 'Tehsil', 'Mandal', 'Hobby', 'Created At'
+  //   ];
+  //   
+  //   const tableRows = forms.map(form => [
+  //     form.id, form.user_name, form.name, form.mobile, form.location || 'N/A',
+  //     form.district_name, form.tehsil_name, form.mandal_name, form.hobby || 'N/A',
+  //     new Date(form.created_at).toLocaleDateString('hi-IN')
+  //   ]);
+  //   
+  //   // Add table
+  //   autoTable(doc, {
+  //     head: [tableColumn],
+  //     body: tableRows,
+  //     startY: 35,
+  //     styles: {
+  //       fontSize: 8,
+  //       cellPadding: 2
+  //     },
+  //     headStyles: {
+  //       fillColor: [66, 153, 225],
+  //       textColor: [255, 255, 255]
+  //     },
+  //     didParseCell: function (data) {
+  //       // Handle Hindi text rendering
+  //       if (data.cell.raw && typeof data.cell.raw === 'string') {
+  //         // Use default font which supports Hindi characters
+  //         data.cell.styles.font = 'times';
+  //       }
+  //     }
+  //   });
+  //   
+  //   // Save the PDF
+  //   doc.save('grh-sampar-report.pdf');
+  //   toast.success('PDF exported successfully');
+  // };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
@@ -178,50 +275,76 @@ export default function GrhSamparReport() {
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter Data</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
-              <select
-                value={filters.districtId}
-                onChange={(e) => handleFilterChange('districtId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-              >
-                <option value="">All Districts</option>
-                {districts.map((district: any) => (
-                  <option key={district.id} value={district.id}>{district.name}</option>
-                ))}
-              </select>
+        {/* Export Buttons and Filters */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+          <div className="bg-gray-50 p-4 rounded-lg flex-1">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter Data</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
+                <select
+                  value={filters.districtId}
+                  onChange={(e) => handleFilterChange('districtId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                >
+                  <option value="">All Districts</option>
+                  {districts.map((district: any) => (
+                    <option key={district.id} value={district.id}>{district.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Tehsil</label>
+                <select
+                  value={filters.tehsilId}
+                  onChange={(e) => handleFilterChange('tehsilId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                  disabled={!filters.districtId}
+                >
+                  <option value="">All Tehsils</option>
+                  {tehsils.map((tehsil: any) => (
+                    <option key={tehsil.id} value={tehsil.id}>{tehsil.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Mandal</label>
+                <select
+                  value={filters.mandalId}
+                  onChange={(e) => handleFilterChange('mandalId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                  disabled={!filters.tehsilId}
+                >
+                  <option value="">All Mandals</option>
+                  {mandals.map((mandal: any) => (
+                    <option key={mandal.id} value={mandal.id}>{mandal.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Tehsil</label>
-              <select
-                value={filters.tehsilId}
-                onChange={(e) => handleFilterChange('tehsilId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                disabled={!filters.districtId}
+          </div>
+          
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Export Data</h3>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={exportToCSV}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                <option value="">All Tehsils</option>
-                {tehsils.map((tehsil: any) => (
-                  <option key={tehsil.id} value={tehsil.id}>{tehsil.name}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Mandal</label>
-              <select
-                value={filters.mandalId}
-                onChange={(e) => handleFilterChange('mandalId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                disabled={!filters.tehsilId}
+                Export CSV
+              </button>
+              <button
+                onClick={exportToExcel}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                <option value="">All Mandals</option>
-                {mandals.map((mandal: any) => (
-                  <option key={mandal.id} value={mandal.id}>{mandal.name}</option>
-                ))}
-              </select>
+                Export Excel
+              </button>
+              {/* <button
+                // onClick={exportToPDF}
+                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                Export PDF
+              </button> */}
             </div>
           </div>
         </div>

@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS vitrit_savaymsevak (
     mandal_id INTEGER REFERENCES mandals(id),
     responsibility_details_hindi TEXT,
     sangh_shikshan_hindi VARCHAR(255),
+    ganvesh_information VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

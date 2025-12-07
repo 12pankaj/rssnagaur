@@ -9,19 +9,26 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource/noto-sans-devanagari": "^5.2.8",
     "@types/bcryptjs": "^2.4.6",
+    "@types/file-saver": "^2.0.7",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/nodemailer": "^7.0.3",
     "@types/pg": "^8.15.6",
+    "@types/xlsx": "^0.0.35",
     "bcryptjs": "^3.0.2",
+    "file-saver": "^2.0.5",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.548.0",
     "next": "16.0.0",
     "nodemailer": "^7.0.10",
     "pg": "^8.16.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-hot-toast": "^2.6.0"
+    "react-hot-toast": "^2.6.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

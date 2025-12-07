@@ -8,8 +8,9 @@ import GrhSamparReport from '@/components/reports/GrhSamparReport';
 import VitritSavaymsevakReport from '@/components/reports/VitritSavaymsevakReport';
 import MandalTeamsReport from '@/components/reports/MandalTeamsReport';
 import CampaignTeamsReport from '@/components/reports/CampaignTeamsReport';
+import VayapakGrhSamparkReport from '@/components/reports/VayapakGrhSamparkReport';
 
-type ReportType = 'dashboard' | 'grh-sampar' | 'vitrit-savaymsevak' | 'mandal-teams' | 'campaign-teams';
+type ReportType = 'dashboard' | 'grh-sampar' | 'vitrit-savaymsevak' | 'mandal-teams' | 'campaign-teams' | 'vayapak-grh-sampark';
 
 export default function Reports() {
   const { user, isAuthenticated } = useAuth();
@@ -96,6 +97,20 @@ export default function Reports() {
       iconBgColor: 'bg-orange-100',
       textColor: 'text-orange-600',
       description: ''
+    },
+    {
+      id: 'vayapak-grh-sampark',
+      title: 'व्यापक गृह संपर्क अभियान रिपोर्ट',
+      subtitle: '',
+      icon: (
+        <svg className="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
+      bgColor: 'bg-red-50',
+      iconBgColor: 'bg-red-100',
+      textColor: 'text-red-600',
+      description: ''
     }
   ];
 
@@ -109,6 +124,8 @@ export default function Reports() {
         return <MandalTeamsReport />;
       case 'campaign-teams':
         return <CampaignTeamsReport />;
+      case 'vayapak-grh-sampark':
+        return <VayapakGrhSamparkReport />;
       default:
         return (
         <div className="p-6 space-y-6">
@@ -179,6 +196,7 @@ export default function Reports() {
               {activeReport === 'grh-sampar' ? 'गृह सम्पर्क अभियान रिपोर्ट' : 
                activeReport === 'vitrit-savaymsevak' ? 'स्वयंसेवक विस्तृत सूची रिपोर्ट' :
                activeReport === 'mandal-teams' ? 'मण्डल टोली रिपोर्ट' :
+               activeReport === 'vayapak-grh-sampark' ? 'व्यापक गृह संपर्क अभियान रिपोर्ट' :
                'गृह सम्पर्क अभियान टोली रिपोर्ट'}
             </h2>
           </div>

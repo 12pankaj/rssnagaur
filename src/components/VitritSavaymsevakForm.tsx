@@ -21,6 +21,7 @@ interface VitritSavaymsevakData {
   mandal_id: string;
   responsibility_details_hindi: string;
   sangh_shikshan_hindi: string;
+  ganvesh_information: string;
 }
 
 interface District {
@@ -44,6 +45,7 @@ interface Mandal {
 }
 
 const responsibilityOptions = [
+  'दायित्व का चयन करें',
   'संघ में दायित्व',
   'विविध संगठन में दायित्व',
   'कोई दायित्व नहीं'
@@ -55,13 +57,14 @@ const initialFormData: VitritSavaymsevakData = {
   phone: '',
   age: '',
   class_profession_hindi: '',
-  responsibility_hindi: 'कोई दायित्व नहीं',
+  responsibility_hindi: 'दायित्व का चयन करें',
   // Initialize new fields
   district_id: '',
   tehsil_id: '',
   mandal_id: '',
   responsibility_details_hindi: '',
-  sangh_shikshan_hindi: ''
+  sangh_shikshan_hindi: '',
+  ganvesh_information: ''
 };
 
 export default function VitritSavaymsevakForm() {
@@ -602,6 +605,50 @@ export default function VitritSavaymsevakForm() {
                       <option value="कार्यकर्ता विकास वर्ग - 1">कार्यकर्ता विकास वर्ग - 1</option>
                       <option value="कार्यकर्ता विकास वर्ग - 2">कार्यकर्ता विकास वर्ग - 2</option>
                     </select>
+                  </div>
+                  
+                  {/* गणवेश जानकारी */}
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <span className="text-lg font-semibold">9. गणवेश जानकारी</span>
+                      <br />
+                      <span className="text-sm text-gray-500">गणवेश की स्थिति चुनें (हिन्दी में)</span>
+                    </label>
+                    <div className="space-y-2">
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="ganvesh_information"
+                          value="पूर्ण गणवेश"
+                          checked={entry.ganvesh_information === "पूर्ण गणवेश"}
+                          onChange={(e) => handleEntryChange(index, e)}
+                          className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        />
+                        <span className="ml-2">पूर्ण गणवेश</span>
+                      </label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="ganvesh_information"
+                          value="अपूर्ण गणवेश"
+                          checked={entry.ganvesh_information === "अपूर्ण गणवेश"}
+                          onChange={(e) => handleEntryChange(index, e)}
+                          className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        />
+                        <span className="ml-2">अपूर्ण गणवेश</span>
+                      </label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="ganvesh_information"
+                          value="गणवेश नहीं है"
+                          checked={entry.ganvesh_information === "गणवेश नहीं है"}
+                          onChange={(e) => handleEntryChange(index, e)}
+                          className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        />
+                        <span className="ml-2">गणवेश नहीं है</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               ))}

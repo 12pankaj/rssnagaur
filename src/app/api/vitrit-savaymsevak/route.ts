@@ -129,14 +129,15 @@ export async function POST(request: NextRequest) {
           mandal_id,
           responsibility_details_hindi,
           sangh_shikshan_hindi,
+          ganvesh_information,
           userId 
         } = entry;
 
         await client.query(
           `INSERT INTO vitrit_savaymsevak 
-           (user_id, name_hindi, location_hindi, phone, age, class_profession_hindi, responsibility_hindi, district_id, tehsil_id, mandal_id, responsibility_details_hindi, sangh_shikshan_hindi) 
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
-          [userId, name_hindi, location_hindi, phone, age, class_profession_hindi, responsibility_hindi, district_id, tehsil_id, mandal_id, responsibility_details_hindi, sangh_shikshan_hindi]
+           (user_id, name_hindi, location_hindi, phone, age, class_profession_hindi, responsibility_hindi, district_id, tehsil_id, mandal_id, responsibility_details_hindi, sangh_shikshan_hindi, ganvesh_information) 
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+          [userId, name_hindi, location_hindi, phone, age, class_profession_hindi, responsibility_hindi, district_id, tehsil_id, mandal_id, responsibility_details_hindi, sangh_shikshan_hindi, ganvesh_information]
         );
       }
 

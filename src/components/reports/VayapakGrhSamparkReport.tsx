@@ -8,41 +8,36 @@ import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-interface VitritSavaymsevakData {
+interface VayapakGrhSamparkData {
   id: number;
-  name_hindi: string;
-  location_hindi: string;
-  phone: string;
-  age: number;
-  class_profession_hindi: string;
-  responsibility_hindi: string;
   user_name: string;
+  district_name: string;
+  tehsil_name: string;
+  mandal_name: string;
+  total_villages: number;
+  contacted_villages: number;
+  distributed_forms: number;
+  distributed_stickers: number;
+  book_sales: number;
+  contact_teams: number;
+  contact_workers: number;
+  male: number;
+  female: number;
+  yoga: number;
+  special_contacts: number;
+  swayamsevak_houses: number;
+  supporter_houses: number;
+  neutral_houses: number;
+  total_houses: number;
+  contacted_houses: number;
   created_at: string;
-  updated_at: string;
 }
 
-export default function VitritSavaymsevakReport() {
+export default function VayapakGrhSamparkReport() {
   const { token } = useAuth();
-  const [data, setData] = useState<VitritSavaymsevakData[]>([]);
+  const [data, setData] = useState<VayapakGrhSamparkData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterResponsibility, setFilterResponsibility] = useState('');
-
-  const responsibilityOptions = [
-    'कोई दायित्व नहीं है',
-    'सामाजिक सेवा',
-    'शिक्षा कार्य',
-    'स्वास्थ्य सेवा',
-    'युवा कार्य',
-    'महिला कार्य',
-    'बाल कार्य',
-    'वृद्ध सेवा',
-    'पर्यावरण संरक्षण',
-    'आपदा प्रबंधन',
-    'सांस्कृतिक कार्य',
-    'खेल कार्य',
-    'अन्य'
-  ];
 
   useEffect(() => {
     fetchData();
@@ -50,7 +45,7 @@ export default function VitritSavaymsevakReport() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/vitrit-savaymsevak', {
+      const response = await fetch('/api/vayapak-grh-sampark', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -58,7 +53,6 @@ export default function VitritSavaymsevakReport() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
         setData(result || []);
       } else {
         toast.error('Failed to fetch data');
@@ -72,36 +66,37 @@ export default function VitritSavaymsevakReport() {
 
   const filteredData = data.filter(item => {
     const matchesSearch = 
-      item.name_hindi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.location_hindi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.phone.includes(searchTerm) ||
-      item.class_profession_hindi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.user_name.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesResponsibility = 
-      !filterResponsibility || item.responsibility_hindi === filterResponsibility;
-
-    return matchesSearch && matchesResponsibility;
+      item?.user_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item?.district_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item?.tehsil_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item?.mandal_name?.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    return matchesSearch;
   });
 
   const exportToCSV = () => {
     const csvContent = [
       // Header row
       [
-        'ID', 'User', 'Name (Hindi)', 'Location (Hindi)', 'Phone', 'Age', 
-        'Profession (Hindi)', 'Responsibility (Hindi)', 'Created At'
+        'ID', 'User', 'District', 'Tehsil', 'Mandal', 
+        'Total Villages', 'Contacted Villages', 'Distributed Forms', 'Distributed Stickers',
+        'Book Sales', 'Contact Teams', 'Contact Workers', 'Male', 'Female', 'Yoga',
+        'Special Contacts', 'Swayamsevak Houses', 'Supporter Houses', 'Neutral Houses',
+        'Total Houses', 'Contacted Houses', 'Created At'
       ],
       // Data rows
       ...filteredData.map(item => [
-        item.id, item.user_name, item.name_hindi, item.location_hindi, 
-        item.phone, item.age, item.class_profession_hindi, 
-        item.responsibility_hindi, new Date(item.created_at).toLocaleDateString()
+        item.id, item.user_name, item.district_name, item.tehsil_name, item.mandal_name,
+        item.total_villages, item.contacted_villages, item.distributed_forms, item.distributed_stickers,
+        item.book_sales, item.contact_teams, item.contact_workers, item.male, item.female, item.yoga,
+        item.special_contacts, item.swayamsevak_houses, item.supporter_houses, item.neutral_houses,
+        item.total_houses, item.contacted_houses, new Date(item.created_at).toLocaleDateString()
       ])
     ];
 
     const csvString = csvContent.map(row => row.join(',')).join('\n');
     const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-    saveAs(blob, 'vitrit-savaymsevak-report.csv');
+    saveAs(blob, 'vayapak-grh-sampark-report.csv');
     toast.success('CSV exported successfully');
   };
 
@@ -109,19 +104,32 @@ export default function VitritSavaymsevakReport() {
     const worksheetData = filteredData.map(item => ({
       'ID': item.id,
       'User': item.user_name,
-      'Name (Hindi)': item.name_hindi,
-      'Location (Hindi)': item.location_hindi,
-      'Phone': item.phone,
-      'Age': item.age,
-      'Profession (Hindi)': item.class_profession_hindi,
-      'Responsibility (Hindi)': item.responsibility_hindi,
+      'District': item.district_name,
+      'Tehsil': item.tehsil_name,
+      'Mandal': item.mandal_name,
+      'Total Villages': item.total_villages,
+      'Contacted Villages': item.contacted_villages,
+      'Distributed Forms': item.distributed_forms,
+      'Distributed Stickers': item.distributed_stickers,
+      'Book Sales': item.book_sales,
+      'Contact Teams': item.contact_teams,
+      'Contact Workers': item.contact_workers,
+      'Male': item.male,
+      'Female': item.female,
+      'Yoga': item.yoga,
+      'Special Contacts': item.special_contacts,
+      'Swayamsevak Houses': item.swayamsevak_houses,
+      'Supporter Houses': item.supporter_houses,
+      'Neutral Houses': item.neutral_houses,
+      'Total Houses': item.total_houses,
+      'Contacted Houses': item.contacted_houses,
       'Created At': new Date(item.created_at).toLocaleDateString()
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(worksheetData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Vitrit Savaymsevak Report');
-    XLSX.writeFile(workbook, 'vitrit-savaymsevak-report.xlsx');
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Vayapak Grh Sampark Report');
+    XLSX.writeFile(workbook, 'vayapak-grh-sampark-report.xlsx');
     toast.success('Excel exported successfully');
   };
 
@@ -130,9 +138,9 @@ export default function VitritSavaymsevakReport() {
   //   
   //   // Add title
   //   doc.setFontSize(18);
-  //   doc.text('स्वयंसेवक विस्तृत सूची रिपोर्ट', 14, 20);
+  //   doc.text('व्यापक गृह संपर्क अभियान रिपोर्ट', 14, 20);
   //   doc.setFontSize(12);
-  //   doc.text('Vitrit Savaymsevak Data Report', 14, 24);
+  //   doc.text('Vayapak Grh Sampark Data Report', 14, 24);
   //   
   //   // Add generation date
   //   const date = new Date().toLocaleDateString('hi-IN');
@@ -141,14 +149,19 @@ export default function VitritSavaymsevakReport() {
   //   
   //   // Prepare table data
   //   const tableColumn = [
-  //     'ID', 'User', 'Name (Hindi)', 'Location (Hindi)', 'Phone', 'Age', 
-  //     'Profession (Hindi)', 'Responsibility (Hindi)', 'Created At'
+  //     'ID', 'User', 'District', 'Tehsil', 'Mandal', 
+  //     'Total Villages', 'Contacted Villages', 'Distributed Forms', 'Distributed Stickers',
+  //     'Book Sales', 'Contact Teams', 'Contact Workers', 'Male', 'Female', 'Yoga',
+  //     'Special Contacts', 'Swayamsevak Houses', 'Supporter Houses', 'Neutral Houses',
+  //     'Total Houses', 'Contacted Houses', 'Created At'
   //   ];
   //   
   //   const tableRows = filteredData.map(item => [
-  //     item.id, item.user_name, item.name_hindi, item.location_hindi, 
-  //     item.phone, item.age, item.class_profession_hindi, 
-  //     item.responsibility_hindi, new Date(item.created_at).toLocaleDateString('hi-IN')
+  //     item.id, item.user_name, item.district_name, item.tehsil_name, item.mandal_name,
+  //     item.total_villages, item.contacted_villages, item.distributed_forms, item.distributed_stickers,
+  //     item.book_sales, item.contact_teams, item.contact_workers, item.male, item.female, item.yoga,
+  //     item.special_contacts, item.swayamsevak_houses, item.supporter_houses, item.neutral_houses,
+  //     item.total_houses, item.contacted_houses, new Date(item.created_at).toLocaleDateString('hi-IN')
   //   ]);
   //   
   //   // Add table
@@ -157,8 +170,8 @@ export default function VitritSavaymsevakReport() {
   //     body: tableRows,
   //     startY: 35,
   //     styles: {
-  //       fontSize: 8,
-  //       cellPadding: 2
+  //       fontSize: 6,
+  //       cellPadding: 1.5
   //     },
   //     headStyles: {
   //       fillColor: [72, 187, 120],
@@ -174,7 +187,7 @@ export default function VitritSavaymsevakReport() {
   //   });
   //   
   //   // Save the PDF
-  //   doc.save('vitrit-savaymsevak-report.pdf');
+  //   doc.save('vayapak-grh-sampark-report.pdf');
   //   toast.success('PDF exported successfully');
   // };
 
@@ -192,40 +205,36 @@ export default function VitritSavaymsevakReport() {
         <div className="flex items-center mb-6">
           <div className="bg-green-100 p-3 rounded-lg mr-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">स्वयंसेवक विस्तृत सूची रिपोर्ट</h1>
-            <p className="text-gray-600">Vitrit Savaymsevak Data Report</p>
+            <h1 className="text-2xl font-bold text-gray-900">व्यापक गृह संपर्क अभियान रिपोर्ट</h1>
+            <p className="text-gray-600">Vayapak Grh Sampark Data Report</p>
           </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-green-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-green-800">Total Volunteers</h3>
+            <h3 className="text-lg font-semibold text-green-800">Total Entries</h3>
             <p className="text-3xl font-bold text-green-600">{data.length}</p>
           </div>
           <div className="bg-blue-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-blue-800">This Month</h3>
+            <h3 className="text-lg font-semibold text-blue-800">Total Villages</h3>
             <p className="text-3xl font-bold text-blue-600">
-              {data.filter(item => {
-                const itemDate = new Date(item.created_at);
-                const now = new Date();
-                return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
-              }).length}
+              {data.reduce((sum, item) => sum + (item.total_villages || 0), 0)}
             </p>
           </div>
           <div className="bg-yellow-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-yellow-800">With Responsibilities</h3>
+            <h3 className="text-lg font-semibold text-yellow-800">Contacted Villages</h3>
             <p className="text-3xl font-bold text-yellow-600">
-              {data.filter(item => item.responsibility_hindi !== 'कोई दायित्व नहीं है').length}
+              {data.reduce((sum, item) => sum + (item.contacted_villages || 0), 0)}
             </p>
           </div>
           <div className="bg-purple-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-purple-800">Average Age</h3>
+            <h3 className="text-lg font-semibold text-purple-800">Total Houses</h3>
             <p className="text-3xl font-bold text-purple-600">
-              {data.length > 0 ? Math.round(data.reduce((sum, item) => sum + item.age, 0) / data.length) : 0}
+              {data.reduce((sum, item) => sum + (item.total_houses || 0), 0)}
             </p>
           </div>
         </div>
@@ -234,32 +243,15 @@ export default function VitritSavaymsevakReport() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
           <div className="bg-gray-50 p-4 rounded-lg flex-1">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter Data</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                  placeholder="Search by name, location, phone, profession..."
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Responsibility</label>
-                <select
-                  value={filterResponsibility}
-                  onChange={(e) => setFilterResponsibility(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                >
-                  <option value="">All Responsibilities</option>
-                  {responsibilityOptions.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                placeholder="Search by user, district, tehsil, mandal..."
+              />
             </div>
           </div>
           
@@ -297,22 +289,25 @@ export default function VitritSavaymsevakReport() {
                   User
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name (Hindi)
+                  Location
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Location (Hindi)
+                  Villages
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Phone
+                  Forms/Stickers
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Age
+                  Book Sales
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Profession
+                  Teams/Workers
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Responsibility
+                  Participants
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Houses
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Created
@@ -325,29 +320,40 @@ export default function VitritSavaymsevakReport() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {item.user_name}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.name_hindi}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div>
+                      <div className="font-medium">{item.district_name}</div>
+                      <div className="text-gray-400">{item.tehsil_name}, {item.mandal_name}</div>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.location_hindi}
+                    <div>Total: {item.total_villages}</div>
+                    <div>Contacted: {item.contacted_villages}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.phone}
+                    <div>Forms: {item.distributed_forms}</div>
+                    <div>Stickers: {item.distributed_stickers}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.age}
+                    {item.book_sales}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.class_profession_hindi}
+                    <div>Teams: {item.contact_teams}</div>
+                    <div>Workers: {item.contact_workers}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      item.responsibility_hindi === 'कोई दायित्व नहीं है' 
-                        ? 'bg-gray-100 text-gray-800' 
-                        : 'bg-green-100 text-green-800'
-                    }`}>
-                      {item.responsibility_hindi}
-                    </span>
+                    <div>Male: {item.male}</div>
+                    <div>Female: {item.female}</div>
+                    <div>Yoga: {item.yoga}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div>Total: {item.total_houses}</div>
+                    <div>Contacted: {item.contacted_houses}</div>
+                    <div>
+                      S: {item.swayamsevak_houses}, 
+                      Su: {item.supporter_houses}, 
+                      N: {item.neutral_houses}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {new Date(item.created_at).toLocaleDateString()}

@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import toast from 'react-hot-toast';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 interface MandalTeamData {
   id: number;
@@ -150,6 +154,137 @@ export default function MandalTeamsReport() {
     });
   };
 
+  const exportToCSV = () => {
+    const csvContent = [
+      // Header row
+      [
+        'ID', 'User', 'District', 'Tehsil', 'Mandal', 
+        'Mandal Leader', 'Leader Phone', 'Secretary', 'Secretary Phone',
+        'Member 1', 'Member 1 Phone', 'Member 2', 'Member 2 Phone',
+        'Member 3', 'Member 3 Phone', 'Member 4', 'Member 4 Phone',
+        'Member 5', 'Member 5 Phone', 'Member 6', 'Member 6 Phone',
+        'Member 7', 'Member 7 Phone', 'Member 8', 'Member 8 Phone',
+        'Member 9', 'Member 9 Phone', 'Created At'
+      ],
+      // Data rows
+      ...teams.map(team => [
+        team.id, team.user_name, team.district_name, team.tehsil_name, team.mandal_name,
+        team.mandal_leader, team.leader_phone, team.mandal_secretary || '', team.secretary_phone || '',
+        team.member1 || '', team.member1_phone || '', team.member2 || '', team.member2_phone || '',
+        team.member3 || '', team.member3_phone || '', team.member4 || '', team.member4_phone || '',
+        team.member5 || '', team.member5_phone || '', team.member6 || '', team.member6_phone || '',
+        team.member7 || '', team.member7_phone || '', team.member8 || '', team.member8_phone || '',
+        team.member9 || '', team.member9_phone || '', new Date(team.created_at).toLocaleDateString()
+      ])
+    ];
+
+    const csvString = csvContent.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'mandal-teams-report.csv');
+    toast.success('CSV exported successfully');
+  };
+
+  const exportToExcel = () => {
+    const worksheetData = teams.map(team => ({
+      'ID': team.id,
+      'User': team.user_name,
+      'District': team.district_name,
+      'Tehsil': team.tehsil_name,
+      'Mandal': team.mandal_name,
+      'Mandal Leader': team.mandal_leader,
+      'Leader Phone': team.leader_phone,
+      'Secretary': team.mandal_secretary || '',
+      'Secretary Phone': team.secretary_phone || '',
+      'Member 1': team.member1 || '',
+      'Member 1 Phone': team.member1_phone || '',
+      'Member 2': team.member2 || '',
+      'Member 2 Phone': team.member2_phone || '',
+      'Member 3': team.member3 || '',
+      'Member 3 Phone': team.member3_phone || '',
+      'Member 4': team.member4 || '',
+      'Member 4 Phone': team.member4_phone || '',
+      'Member 5': team.member5 || '',
+      'Member 5 Phone': team.member5_phone || '',
+      'Member 6': team.member6 || '',
+      'Member 6 Phone': team.member6_phone || '',
+      'Member 7': team.member7 || '',
+      'Member 7 Phone': team.member7_phone || '',
+      'Member 8': team.member8 || '',
+      'Member 8 Phone': team.member8_phone || '',
+      'Member 9': team.member9 || '',
+      'Member 9 Phone': team.member9_phone || '',
+      'Created At': new Date(team.created_at).toLocaleDateString()
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Mandal Teams Report');
+    XLSX.writeFile(workbook, 'mandal-teams-report.xlsx');
+    toast.success('Excel exported successfully');
+  };
+
+  // const exportToPDF = () => {
+  //   const doc = new jsPDF();
+  //   
+  //   // Add title
+  //   doc.setFontSize(18);
+  //   doc.text('मण्डल टीम रिपोर्ट', 14, 20);
+  //   doc.setFontSize(12);
+  //   doc.text('Mandal Team Data Report', 14, 24);
+  //   
+  //   // Add generation date
+  //   const date = new Date().toLocaleDateString('hi-IN');
+  //   doc.setFontSize(10);
+  //   doc.text(`रिपोर्ट जनरेशन दिनांक: ${date}`, 14, 30);
+  //   
+  //   // Prepare table data
+  //   const tableColumn = [
+  //     'ID', 'User', 'District', 'Tehsil', 'Mandal', 
+  //     'Mandal Leader', 'Leader Phone', 'Secretary', 'Secretary Phone',
+  //     'Member 1', 'Member 1 Phone', 'Member 2', 'Member 2 Phone',
+  //     'Member 3', 'Member 3 Phone', 'Member 4', 'Member 4 Phone',
+  //     'Member 5', 'Member 5 Phone', 'Member 6', 'Member 6 Phone',
+  //     'Member 7', 'Member 7 Phone', 'Member 8', 'Member 8 Phone',
+  //     'Member 9', 'Member 9 Phone', 'Created At'
+  //   ];
+  //   
+  //   const tableRows = teams.map(team => [
+  //     team.id, team.user_name, team.district_name, team.tehsil_name, team.mandal_name,
+  //     team.mandal_leader, team.leader_phone, team.mandal_secretary || '', team.secretary_phone || '',
+  //     team.member1 || '', team.member1_phone || '', team.member2 || '', team.member2_phone || '',
+  //     team.member3 || '', team.member3_phone || '', team.member4 || '', team.member4_phone || '',
+  //     team.member5 || '', team.member5_phone || '', team.member6 || '', team.member6_phone || '',
+  //     team.member7 || '', team.member7_phone || '', team.member8 || '', team.member8_phone || '',
+  //     team.member9 || '', team.member9_phone || '', new Date(team.created_at).toLocaleDateString('hi-IN')
+  //   ]);
+  //   
+  //   // Add table
+  //   autoTable(doc, {
+  //     head: [tableColumn],
+  //     body: tableRows,
+  //     startY: 35,
+  //     styles: {
+  //       fontSize: 6,
+  //       cellPadding: 1.5
+  //     },
+  //     headStyles: {
+  //       fillColor: [147, 51, 234],
+  //       textColor: [255, 255, 255]
+  //     },
+  //     didParseCell: function (data) {
+  //       // Handle Hindi text rendering
+  //       if (data.cell.raw && typeof data.cell.raw === 'string') {
+  //         // Use default font which supports Hindi characters
+  //         data.cell.styles.font = 'times';
+  //       }
+  //     }
+  //   });
+  //   
+  //   // Save the PDF
+  //   doc.save('mandal-teams-report.pdf');
+  //   toast.success('PDF exported successfully');
+  // };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
@@ -196,50 +331,76 @@ export default function MandalTeamsReport() {
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter Data</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
-              <select
-                value={filters.districtId}
-                onChange={(e) => handleFilterChange('districtId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-              >
-                <option value="">All Districts</option>
-                {districts.map((district) => (
-                  <option key={district.id} value={district.id}>{district.name}</option>
-                ))}
-              </select>
+        {/* Export Buttons and Filters */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+          <div className="bg-gray-50 p-4 rounded-lg flex-1">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter Data</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
+                <select
+                  value={filters.districtId}
+                  onChange={(e) => handleFilterChange('districtId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                >
+                  <option value="">All Districts</option>
+                  {districts.map((district) => (
+                    <option key={district.id} value={district.id}>{district.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Tehsil</label>
+                <select
+                  value={filters.tehsilId}
+                  onChange={(e) => handleFilterChange('tehsilId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                  disabled={!filters.districtId}
+                >
+                  <option value="">All Tehsils</option>
+                  {tehsils.map((tehsil) => (
+                    <option key={tehsil.id} value={tehsil.id}>{tehsil.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Mandal</label>
+                <select
+                  value={filters.mandalId}
+                  onChange={(e) => handleFilterChange('mandalId', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                  disabled={!filters.tehsilId}
+                >
+                  <option value="">All Mandals</option>
+                  {mandals.map((mandal) => (
+                    <option key={mandal.id} value={mandal.id}>{mandal.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Tehsil</label>
-              <select
-                value={filters.tehsilId}
-                onChange={(e) => handleFilterChange('tehsilId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                disabled={!filters.districtId}
+          </div>
+          
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Export Data</h3>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={exportToCSV}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                <option value="">All Tehsils</option>
-                {tehsils.map((tehsil) => (
-                  <option key={tehsil.id} value={tehsil.id}>{tehsil.name}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Mandal</label>
-              <select
-                value={filters.mandalId}
-                onChange={(e) => handleFilterChange('mandalId', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
-                disabled={!filters.tehsilId}
+                Export CSV
+              </button>
+              <button
+                onClick={exportToExcel}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                <option value="">All Mandals</option>
-                {mandals.map((mandal) => (
-                  <option key={mandal.id} value={mandal.id}>{mandal.name}</option>
-                ))}
-              </select>
+                Export Excel
+              </button>
+              {/* <button
+                // onClick={exportToPDF}
+                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                Export PDF
+              </button> */}
             </div>
           </div>
         </div>
