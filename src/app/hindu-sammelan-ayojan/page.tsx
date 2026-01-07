@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import EnhancedLocationSelector from '@/components/EnhancedLocationSelector';
 
@@ -17,18 +17,13 @@ interface FormData {
 export default function HinduSammelanAyojanForm() {
   const { user, token, isAuthenticated } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
   
-  // Get location parameters from URL
-  const districtParam = searchParams.get('district');
-  const tehsilParam = searchParams.get('tehsil');
-  const mandalParam = searchParams.get('mandal');
   
   const [step, setStep] = useState(1); // 1 for location selection, 2 for multiple entries
   const [selectedLocation, setSelectedLocation] = useState({
-    district_id: districtParam || '',
-    tehsil_id: tehsilParam || '',
-    mandal_id: mandalParam || ''
+    district_id:  '',
+    tehsil_id: '',
+    mandal_id: ''
   });
   
   const [formEntries, setFormEntries] = useState<FormData[]>([
