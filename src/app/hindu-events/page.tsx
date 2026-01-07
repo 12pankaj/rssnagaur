@@ -38,7 +38,7 @@ export default function HinduEventsPage() {
     { id: 6, name: 'युवा शिविर', href: '#' },
     { id: 7, name: 'अधिकतम शाखा स्थान', href: '#' },
     { id: 8, name: 'ग्राम विकास गतिविधि योजना', href: '#' },
-    { id: 9, name: 'हिन्दू सम्मेलन', href: '#' },
+    { id: 9, name: 'हिन्दू सम्मेलन', href: '/hindu-events/sammelan-form' },
   ];
 
   return (

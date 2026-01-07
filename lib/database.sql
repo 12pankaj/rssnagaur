@@ -315,3 +315,38 @@ CREATE TABLE IF NOT EXISTS vayapak_grh_sampark (
     contacted_houses INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Hindu Sammelan Ayojan Samiti table
+CREATE TABLE IF NOT EXISTS hindu_sammelan_ayojan (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    responsibility VARCHAR(100),
+    name VARCHAR(255),
+    biradari VARCHAR(255),
+    location VARCHAR(255),
+    phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Hindu Sammelan table
+CREATE TABLE IF NOT EXISTS hindu_sammelan (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    district_id INTEGER REFERENCES districts(id),
+    tehsil_id INTEGER REFERENCES tehsils(id),
+    mandal_id INTEGER REFERENCES mandals(id),
+    date DATE,
+    committee_name VARCHAR(255),
+    patron VARCHAR(255),
+    president VARCHAR(255),
+    secretary VARCHAR(255),
+    treasurer VARCHAR(255),
+    total_male INTEGER,
+    total_female INTEGER,
+    total_worker INTEGER,
+    special_details TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

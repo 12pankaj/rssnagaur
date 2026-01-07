@@ -4,7 +4,7 @@ const pool = new Pool({
       user:'postgres',
       host: '72.60.222.102',
       database: 'rsssunghnagaur',
-      password:   'rssnagaur',
+      password:   'Rssnagaur',
       port:5432,
       ssl: {
         rejectUnauthorized: false
