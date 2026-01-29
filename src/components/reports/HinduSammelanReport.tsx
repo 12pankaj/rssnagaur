@@ -8,16 +8,26 @@ import { saveAs } from 'file-saver';
 
 interface HinduSammelanData {
   id: number;
-  date: string;
-  committee_name: string;
-  patron: string;
-  president: string;
-  secretary: string;
-  treasurer: string;
-  total_male: number;
-  total_female: number;
-  total_worker: number;
-  special_details: string;
+  total_mandals: number;
+  total_contacted_mandals: number;
+  total_contacted_villages: number;
+  total_basti: number;
+  total_contacted_basti: number;
+  other_info: string;
+  total_distributed_forms: number;
+  total_distributed_stickers: number;
+  total_book_sales: number;
+  total_participating_teams: number;
+  total_participating_workers: number;
+  male_workers: number;
+  female_workers: number;
+  yoga_workers: number;
+  special_person_contacts: number;
+  total_houses: number;
+  total_contacted_houses: number;
+  swayamsevak_houses: number;
+  supporter_houses: number;
+  neutral_houses: number;
   district_name: string;
   tehsil_name: string;
   mandal_name: string;
@@ -135,16 +145,26 @@ export default function HinduSammelanReport() {
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(events.map(event => ({
       'ID': event.id,
-      'दिनांक': new Date(event.date).toLocaleDateString(),
-      'सम्मेलन समिति का नाम': event.committee_name,
-      'संरक्षक': event.patron,
-      'अध्यक्ष': event.president,
-      'सचिव': event.secretary,
-      'कोषाध्यक्ष': event.treasurer,
-      'कुल पुरुष': event.total_male,
-      'कुल महिला': event.total_female,
-      'कुल कार्यकर्ता': event.total_worker,
-      'विशेष विवरण': event.special_details,
+      'कुल मंडल': event.total_mandals,
+      'कुल सम्पर्कित मंडल': event.total_contacted_mandals,
+      'कुल सम्पर्कित ग्राम': event.total_contacted_villages,
+      'कुल बस्ती': event.total_basti,
+      'कुल सम्पर्कित बस्ती': event.total_contacted_basti,
+      'अन्य जानकारी': event.other_info,
+      'कुल वितरित कर पत्रक': event.total_distributed_forms,
+      'कुल वितरित स्टिकर': event.total_distributed_stickers,
+      'कुल पुस्तक बिक्री': event.total_book_sales,
+      'कुल सहभागी टोली': event.total_participating_teams,
+      'कुल सहभागी कार्यकर्ता': event.total_participating_workers,
+      'पुरुष': event.male_workers,
+      'मातृशक्ति': event.female_workers,
+      'योग': event.yoga_workers,
+      'विशेष व्यक्ति संपर्क': event.special_person_contacts,
+      'कुल घर': event.total_houses,
+      'कुल सम्पर्कित घर': event.total_contacted_houses,
+      'स्वयंसेवक घर': event.swayamsevak_houses,
+      'समर्थक घर': event.supporter_houses,
+      'तटस्थ घर': event.neutral_houses,
       'जिला': event.district_name,
       'खंड': event.tehsil_name,
       'मंडल': event.mandal_name,
@@ -256,15 +276,22 @@ export default function HinduSammelanReport() {
             <thead>
               <tr className="bg-gray-100">
                 <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">ID</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">दिनांक</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">समिति नाम</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">संरक्षक</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">अध्यक्ष</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सचिव</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कोषाध्यक्ष</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल पुरुष</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल महिला</th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल कार्यकर्ता</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल मंडल</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सम्पर्कित मंडल</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सम्पर्कित ग्राम</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल बस्ती</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सम्पर्कित बस्ती</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">वितरित पत्रक</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">वितरित स्टिकर</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">पुस्तक बिक्री</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सहभागी टोली</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कार्यकर्ता</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">पुरुष</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">महिला</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">योग</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">विशेष संपर्क</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">कुल घर</th>
+                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">सम्पर्कित घर</th>
                 <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">जिला</th>
                 <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">खंड</th>
                 <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">मंडल</th>
@@ -276,15 +303,22 @@ export default function HinduSammelanReport() {
                 events.map((event, index) => (
                   <tr key={event.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                     <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.id}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{new Date(event.date).toLocaleDateString()}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.committee_name}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.patron}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.president}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.secretary}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.treasurer}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_male}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_female}</td>
-                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_worker}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_mandals}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_contacted_mandals}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_contacted_villages}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_basti}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_contacted_basti}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_distributed_forms}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_distributed_stickers}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_book_sales}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_participating_teams}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_participating_workers}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.male_workers}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.female_workers}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.yoga_workers}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.special_person_contacts}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_houses}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.total_contacted_houses}</td>
                     <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.district_name}</td>
                     <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.tehsil_name}</td>
                     <td className="py-3 px-4 text-sm text-gray-700 border-b">{event.mandal_name}</td>
@@ -293,7 +327,7 @@ export default function HinduSammelanReport() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={14} className="py-8 px-4 text-center text-gray-500">
+                  <td colSpan={21} className="py-8 px-4 text-center text-gray-500">
                     कोई डेटा उपलब्ध नहीं है
                   </td>
                 </tr>
@@ -308,25 +342,25 @@ export default function HinduSammelanReport() {
         <h3 className="font-semibold text-gray-800 mb-2">सारांश</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-white p-3 rounded-lg shadow-sm">
-            <p className="text-sm text-gray-600">कुल सम्मेलन</p>
+            <p className="text-sm text-gray-600">कुल प्रविष्टियाँ</p>
             <p className="text-xl font-bold text-blue-600">{events.length}</p>
           </div>
           <div className="bg-white p-3 rounded-lg shadow-sm">
-            <p className="text-sm text-gray-600">कुल पुरुष</p>
+            <p className="text-sm text-gray-600">कुल सम्पर्कित मंडल</p>
             <p className="text-xl font-bold text-green-600">
-              {events.reduce((sum, event) => sum + event.total_male, 0)}
+              {events.reduce((sum, event) => sum + event.total_contacted_mandals, 0)}
             </p>
           </div>
           <div className="bg-white p-3 rounded-lg shadow-sm">
-            <p className="text-sm text-gray-600">कुल महिला</p>
+            <p className="text-sm text-gray-600">कुल सहभागी कार्यकर्ता</p>
             <p className="text-xl font-bold text-pink-600">
-              {events.reduce((sum, event) => sum + event.total_female, 0)}
+              {events.reduce((sum, event) => sum + event.total_participating_workers, 0)}
             </p>
           </div>
           <div className="bg-white p-3 rounded-lg shadow-sm">
-            <p className="text-sm text-gray-600">कुल कार्यकर्ता</p>
+            <p className="text-sm text-gray-600">कुल सम्पर्कित घर</p>
             <p className="text-xl font-bold text-purple-600">
-              {events.reduce((sum, event) => sum + event.total_worker, 0)}
+              {events.reduce((sum, event) => sum + event.total_contacted_houses, 0)}
             </p>
           </div>
         </div>

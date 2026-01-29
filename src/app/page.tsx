@@ -16,7 +16,7 @@ useEffect(() => {
     }
   }, [isAuthenticated, router]);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35]">
 
       {/* Auth Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -61,7 +61,7 @@ useEffect(() => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <p className="text-gray-600">
-              © 2024 Rashtriya Swayamsevak Sangh - Nagaur Vibhag. All rights reserved.
+              © 2026 Rashtriya Swayamsevak Sangh - Nagaur Vibhag. All rights reserved. Developed by Pankaj Dadhich.
             </p>
           </div>
         </div>

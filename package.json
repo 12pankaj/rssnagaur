@@ -17,6 +17,7 @@
     "@types/pg": "^8.15.6",
     "@types/xlsx": "^0.0.35",
     "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
     "file-saver": "^2.0.5",
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^3.0.4",

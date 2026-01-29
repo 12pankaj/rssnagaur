@@ -7,6 +7,11 @@
   --background-brown: #895129;
   --text-white: #FFFFFF;
   --accent-blue: #0D47A1;
+  /* Orange gradient colors matching mobile app */
+  --orange-gradient-start: #FF8C42;
+  --orange-gradient-end: #FF6B35;
+  --orange-primary: #FF7A3D;
+  --orange-dark: #FF6B35;
 }
 
 @theme inline {

@@ -29,8 +29,10 @@ export default function VitritSavaymsevakPage() {
   }
 
   return (
-    <div className="px-4 py-6 sm:px-0">
-      <VitritSavaymsevakForm />
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35] py-8">
+      <div className="px-4 sm:px-0">
+        <VitritSavaymsevakForm />
+      </div>
     </div>
   );
 }

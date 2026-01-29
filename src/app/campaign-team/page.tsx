@@ -193,8 +193,10 @@ export default function CampaignTeamForm() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white shadow rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">गृह सम्पर्क अभियान टोली</h1>
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35] py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white rounded-t-3xl shadow-2xl p-6 mt-8">
+          <h1 className="text-3xl font-bold text-[#FF7A3D] mb-6 text-center">गृह सम्पर्क अभियान टोली</h1>
         <p></p>
         {currentStep === 1 && (
           <div className="space-y-6">
@@ -207,7 +209,7 @@ export default function CampaignTeamForm() {
                   <select
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                   >
                     <option value="">जिला चुनें</option>
                     {districts.map((district) => (
@@ -221,7 +223,7 @@ export default function CampaignTeamForm() {
                   <select
                     value={selectedTehsil}
                     onChange={(e) => setSelectedTehsil(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                     disabled={!selectedDistrict}
                   >
                     <option value="">खण्ड/नगर चुनें</option>
@@ -236,7 +238,7 @@ export default function CampaignTeamForm() {
                   <select
                     value={selectedMandal}
                     onChange={(e) => setSelectedMandal(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                     disabled={!selectedTehsil}
                   >
                     <option value="">मण्डल/बस्ती चुनें</option>
@@ -275,7 +277,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.location}
                         onChange={(e) => updateTeam(index, 'location', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="स्थान दर्ज करें"
                         required
                       />
@@ -286,7 +288,7 @@ export default function CampaignTeamForm() {
                         type="number"
                         value={team.teamNumber}
                         onChange={(e) => updateTeam(index, 'teamNumber', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="टोली क्रमांक दर्ज करें"
                       />
                     </div>
@@ -297,7 +299,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.teamLeader}
                         onChange={(e) => updateTeam(index, 'teamLeader', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="टोली प्रमुख का नाम दर्ज करें"
                       />
                     </div>
@@ -308,7 +310,7 @@ export default function CampaignTeamForm() {
                         type="tel"
                         value={team.leaderPhone}
                         onChange={(e) => updateTeam(index, 'leaderPhone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="टोली प्रमुख का फ़ोन नंबर दर्ज करें"
                       />
                     </div>
@@ -319,7 +321,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.assistantLeader}
                         onChange={(e) => updateTeam(index, 'assistantLeader', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="टोली सह प्रमुख का नाम दर्ज करें"
                       />
                     </div>
@@ -330,7 +332,7 @@ export default function CampaignTeamForm() {
                         type="tel"
                         value={team.assistantPhone}
                         onChange={(e) => updateTeam(index, 'assistantPhone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="टोली सह प्रमुख का फ़ोन नंबर दर्ज करें"
                       />
                     </div>
@@ -341,7 +343,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.member1}
                         onChange={(e) => updateTeam(index, 'member1', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 1 का नाम दर्ज करें"
                       />
                     </div>
@@ -352,7 +354,7 @@ export default function CampaignTeamForm() {
                         type="tel"
                         value={team.member1Phone}
                         onChange={(e) => updateTeam(index, 'member1Phone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 1 का फ़ोन नंबर दर्ज करें"
                       />
                     </div>
@@ -363,7 +365,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.member2}
                         onChange={(e) => updateTeam(index, 'member2', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 2 का नाम दर्ज करें"
                       />
                     </div>
@@ -374,7 +376,7 @@ export default function CampaignTeamForm() {
                         type="tel"
                         value={team.member2Phone}
                         onChange={(e) => updateTeam(index, 'member2Phone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 2 का फ़ोन नंबर दर्ज करें"
                       />
                     </div>
@@ -385,7 +387,7 @@ export default function CampaignTeamForm() {
                         type="text"
                         value={team.member3}
                         onChange={(e) => updateTeam(index, 'member3', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 3 का नाम दर्ज करें"
                       />
                     </div>
@@ -396,7 +398,7 @@ export default function CampaignTeamForm() {
                         type="tel"
                         value={team.member3Phone}
                         onChange={(e) => updateTeam(index, 'member3Phone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="सदस्य 3 का फ़ोन नंबर दर्ज करें"
                       />
                     </div>
@@ -407,14 +409,14 @@ export default function CampaignTeamForm() {
               <div className="flex space-x-4">
                 <button
                   onClick={() => setCurrentStep(1)}
-                  className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   पीछे
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="flex-1 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] disabled:opacity-50 shadow-md font-semibold transition-all duration-200"
                 >
                   {isSubmitting ? 'सहेजा जा रहा है...' : 'सभी प्रविष्टियाँ सहेजें'}
                 </button>
@@ -422,6 +424,7 @@ export default function CampaignTeamForm() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

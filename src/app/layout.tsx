@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/rsslogo.jpeg",
+        url: "/logo.jpg",
         type: "image/jpeg",
       },
     ],
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
       "A digital platform for managing Swayamsevaks and activities in RSS Nagaur Vibhag.",
     images: [
       {
-        url: "/rsslogo.jpeg",
+        url: "/logo.jpg",
         width: 400,
         height: 400,
         alt: "RSS Nagaur Logo",

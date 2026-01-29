@@ -226,7 +226,7 @@ export default function HinduSammelanAyojanForm() {
           <p className="text-gray-600 mb-6">Please login to access this form</p>
           <button 
             onClick={() => router.push('/')} 
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            className="w-full bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white py-3 rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] transition-all duration-200 font-semibold shadow-md"
           >
             Go to Login
           </button>
@@ -236,11 +236,11 @@ export default function HinduSammelanAyojanForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35] py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-t-3xl shadow-2xl overflow-hidden mt-8">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
+          <div className="bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] p-6 text-white">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold">हिन्दू सम्मेलन आयोजन समिति</h1>
@@ -265,14 +265,14 @@ export default function HinduSammelanAyojanForm() {
             <div className="mb-6">
               <div className="flex items-center">
                 <div className={`flex items-center ${step === 1 ? 'text-blue-600' : 'text-gray-400'}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 1 ? 'bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white' : 'bg-gray-200'}`}>
                     1
                   </div>
                   <div className="ml-2 font-medium">स्थान चुनें</div>
                 </div>
                 <div className="flex-1 h-1 mx-4 bg-gray-200"></div>
                 <div className={`flex items-center ${step === 2 ? 'text-blue-600' : 'text-gray-400'}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 2 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 2 ? 'bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white' : 'bg-gray-200'}`}>
                     2
                   </div>
                   <div className="ml-2 font-medium">सदस्य जानकारी भरें</div>
@@ -357,7 +357,7 @@ export default function HinduSammelanAyojanForm() {
                           name="responsibility"
                           value={entry.responsibility}
                           onChange={(e) => handleEntryChange(index, e)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         >
                           {responsibilityOptions.map((option, idx) => (
                             <option key={idx} value={option}>{option}</option>
@@ -378,7 +378,7 @@ export default function HinduSammelanAyojanForm() {
                           name="name"
                           value={entry.name}
                           onChange={(e) => handleEntryChange(index, e)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                           placeholder="नाम दर्ज करें"
                           required
                         />
@@ -397,7 +397,7 @@ export default function HinduSammelanAyojanForm() {
                           name="biradari"
                           value={entry.biradari}
                           onChange={(e) => handleEntryChange(index, e)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                           placeholder="बिरादरी दर्ज करें"
                         />
                       </div>
@@ -415,7 +415,7 @@ export default function HinduSammelanAyojanForm() {
                           name="location"
                           value={entry.location}
                           onChange={(e) => handleEntryChange(index, e)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                           placeholder="स्थान दर्ज करें"
                         />
                       </div>
@@ -454,7 +454,7 @@ export default function HinduSammelanAyojanForm() {
                   <button
                     type="button"
                     onClick={addNewEntry}
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                    className="px-4 py-2 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] shadow-md font-semibold transition-all duration-200"
                   >
                     + नया सदस्य जोड़ें
                   </button>
@@ -473,7 +473,7 @@ export default function HinduSammelanAyojanForm() {
                     type="submit"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] disabled:opacity-50 shadow-md font-semibold transition-all duration-200"
                   >
                     {isSubmitting ? 'सबमिट हो रहा है...' : 'सबमिट करें'}
                   </button>

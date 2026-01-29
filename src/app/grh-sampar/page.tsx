@@ -172,9 +172,10 @@ const responsibilityOptions = [
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white shadow rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">गृह सम्पर्क अभियान</h1>
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35] py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white rounded-t-3xl shadow-2xl p-6 mt-8">
+          <h1 className="text-3xl font-bold text-[#FF7A3D] mb-6 text-center">गृह सम्पर्क अभियान</h1>
         
         {currentStep === 1 && (
           <EnhancedLocationSelector 
@@ -191,7 +192,7 @@ const responsibilityOptions = [
               <div className="mb-4">
                 <button
                   onClick={addForm}
-                  className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  className="bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white px-4 py-2 rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7A3D] shadow-md font-semibold transition-all duration-200"
                 >
                   नई प्रविष्टि जोड़ें
                 </button>
@@ -218,7 +219,7 @@ const responsibilityOptions = [
                         type="text"
                         value={form.name}
                         onChange={(e) => updateForm(index, 'name', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="नाम दर्ज करें"
                         required
                       />
@@ -230,7 +231,7 @@ const responsibilityOptions = [
                         type="tel"
                         value={form.mobile}
                         onChange={(e) => updateForm(index, 'mobile', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="मोबाइल नंबर दर्ज करें"
                         required
                       />
@@ -242,7 +243,7 @@ const responsibilityOptions = [
                         type="text"
                         value={form.location}
                         onChange={(e) => updateForm(index, 'location', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="स्थान दर्ज करें"
                         required
                       />
@@ -254,7 +255,7 @@ const responsibilityOptions = [
                         type="text"
                         value={form.work}
                         onChange={(e) => updateForm(index, 'work', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="कार्य/व्यवसाय दर्ज करें"
                         required
                       />
@@ -267,7 +268,7 @@ const responsibilityOptions = [
               name="responsibility_hindi"
               value={form.hobby}
               onChange={(e) => updateForm(index, 'hobby', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
               required
             >
               {responsibilityOptions.map((option, index) => (
@@ -283,7 +284,7 @@ const responsibilityOptions = [
                       <textarea
                         value={form.description}
                         onChange={(e) => updateForm(index, 'description', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="विशेष विवरण (टिप्पणी) दर्ज करें"
                         rows={3}
                         required
@@ -296,14 +297,14 @@ const responsibilityOptions = [
               <div className="flex space-x-4">
                 <button
                   onClick={() => setCurrentStep(1)}
-                  className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   पीछे
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                   className=" flex-1 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] disabled:opacity-50 shadow-md font-semibold transition-all duration-200"
           >
                   {isSubmitting ? 'सेव कर रहे हैं...' : 'सभी प्रविष्टियाँ सेव करे'}
                 </button>
@@ -311,6 +312,7 @@ const responsibilityOptions = [
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

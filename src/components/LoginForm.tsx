@@ -50,49 +50,34 @@ export default function LoginForm() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200/50 p-8">
-        <div className="text-center mb-8">
-          <div className="w-100 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-2xl">RSS NAGAUR VIBHAG</span>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">एप्लीकेशन पर आपका स्वागत है |</h2>
-          {/* <p className="text-gray-600">Sign in to your account to continue</p> */}
+     <div className="bg-white rounded-xl shadow-2xl p-8 mt-8">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-[#FF7A3D] mb-2 text-center">Sign in Your Account</h2>
+          <p className="text-base text-gray-900 text-center">Welcome Back</p>
         </div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
-              Email Address
+            <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+              Email ID
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                </svg>
-              </div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                placeholder="Enter your email address"
-              />
-            </div>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className="block w-full px-4 py-3 border border-gray-300 rounded-full  text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
+              placeholder="Enter user Id"
+            />
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-900">
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
               <input
                 id="password"
                 name="password"
@@ -100,13 +85,13 @@ export default function LoginForm() {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                placeholder="Enter your password"
+                className="block w-full px-4 py-3 pr-12 border border-gray-300 rounded-full  text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
+                placeholder="Enter Password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center"
               >
                 <svg className="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {showPassword ? (
@@ -118,11 +103,17 @@ export default function LoginForm() {
               </button>
             </div>
           </div>
+{/* 
+          <div className="flex">
+            <a href="#" className="text-sm font-medium text-[#FF7A3D] hover:text-[#FF6B35]">
+              Forgot Password
+            </a>
+          </div> */}
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-full shadow-md text-base font-semibold text-white bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] hover:from-[#FF7A3D] hover:to-[#FF6B35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7A3D] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
             {isLoading ? (
               <>
@@ -137,15 +128,6 @@ export default function LoginForm() {
             )}
           </button>
         </form>
-{/* 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
-            <a href="/signup" className="font-semibold text-blue-600 hover:text-blue-500 transition-colors">
-              Sign up here
-            </a>
-          </p>
-        </div> */}
       </div>
     </div>
   );

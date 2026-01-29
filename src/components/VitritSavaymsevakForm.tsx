@@ -335,8 +335,8 @@ export default function VitritSavaymsevakForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white shadow rounded-lg p-6">
+    <div className="max-w-4xl mx-auto px-4">
+      <div className="bg-white rounded-t-3xl shadow-2xl p-6 mt-8">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">स्वयंसेवक विस्तृत सूची विवरण</h1>
           <p className="text-gray-600">अपना स्वयंसेवक विवरण भरें और सहेजें</p>
@@ -346,14 +346,14 @@ export default function VitritSavaymsevakForm() {
         <div className="mb-6">
           <div className="flex items-center">
             <div className={`flex items-center ${step === 1 ? 'text-blue-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 1 ? 'bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white' : 'bg-gray-200'}`}>
                 1
               </div>
               <div className="ml-2 font-medium">स्थान चुनें</div>
             </div>
             <div className="flex-1 h-1 mx-4 bg-gray-200"></div>
             <div className={`flex items-center ${step === 2 ? 'text-blue-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 2 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 2 ? 'bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white' : 'bg-gray-200'}`}>
                 2
               </div>
               <div className="ml-2 font-medium">विवरण भरें</div>
@@ -367,7 +367,7 @@ export default function VitritSavaymsevakForm() {
               <p className="text-blue-700">आपका डेटा पहले से सहेजा गया है।</p>
               <button
                 onClick={handleEdit}
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                className="bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white px-4 py-2 rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] shadow-md font-semibold transition-all duration-200"
               >
                 संपादित करें
               </button>
@@ -454,7 +454,7 @@ export default function VitritSavaymsevakForm() {
                         name="name_hindi"
                         value={entry.name_hindi}
                         onChange={(e) => handleEntryChange(index, e)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="अपना नाम हिन्दी में लिखें"
                         required
                       />
@@ -473,7 +473,7 @@ export default function VitritSavaymsevakForm() {
                         name="location_hindi"
                         value={entry.location_hindi}
                         onChange={(e) => handleEntryChange(index, e)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="अपना स्थान हिन्दी में लिखें"
                         required
                       />
@@ -492,7 +492,7 @@ export default function VitritSavaymsevakForm() {
                         name="phone"
                         value={entry.phone}
                         onChange={(e) => handleEntryChange(index, e)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="10 अंकों का मोबाइल नंबर"
                         maxLength={10}
                         required
@@ -512,7 +512,7 @@ export default function VitritSavaymsevakForm() {
                         name="age"
                         value={entry.age}
                         onChange={(e) => handleEntryChange(index, e)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                         placeholder="आयु"
                         min="1"
                         max="100"
@@ -534,7 +534,7 @@ export default function VitritSavaymsevakForm() {
                       value={entry.class_profession_hindi}
                       onChange={(e) => handleEntryChange(index, e)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="अपना कक्षा या व्यवसाय हिन्दी में लिखें"
                       required
                     />
@@ -552,7 +552,7 @@ export default function VitritSavaymsevakForm() {
                       name="responsibility_hindi"
                       value={entry.responsibility_hindi}
                       onChange={(e) => handleEntryChange(index, e)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       required
                     >
                       {responsibilityOptions.map((option, idx) => (
@@ -576,7 +576,7 @@ export default function VitritSavaymsevakForm() {
                       value={entry.responsibility_details_hindi}
                       onChange={(e) => handleEntryChange(index, e)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="दायित्व के बारे में विस्तार से लिखें"
                     />
                   </div>
@@ -593,7 +593,7 @@ export default function VitritSavaymsevakForm() {
                       name="sangh_shikshan_hindi"
                       value={entry.sangh_shikshan_hindi}
                       onChange={(e) => handleEntryChange(index, e)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                     >
                       <option value="">संघ शिक्षण चुनें</option>
                       <option value="प्रारम्भिक वर्ग">प्रारम्भिक वर्ग</option>
@@ -658,7 +658,7 @@ export default function VitritSavaymsevakForm() {
                 <button
                   type="button"
                   onClick={addNewEntry}
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                    className="px-4 py-2 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] shadow-md font-semibold transition-all duration-200"
                 >
                   + नई प्रविष्टि जोड़ें
                 </button>
@@ -678,7 +678,7 @@ export default function VitritSavaymsevakForm() {
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                      className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
                     >
                       रद्द करें
                     </button>
@@ -686,7 +686,7 @@ export default function VitritSavaymsevakForm() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    className="px-6 py-3 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] disabled:opacity-50 shadow-md font-semibold transition-all duration-200"
                   >
                     {isLoading ? 'सहेजा जा रहा है...' : (isEditing ? 'अपडेट करें' : 'सेव करें')}
                   </button>

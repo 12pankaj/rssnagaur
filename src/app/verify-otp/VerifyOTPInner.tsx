@@ -56,13 +56,13 @@ export default function VerifyOTPInner() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FF8C42] to-[#FF6B35]">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
             Verify OTP
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-white">
             {emailSent ? (
               <>Enter the 6-digit OTP sent to your email {email || mobile}</>
             ) : (
@@ -85,7 +85,7 @@ export default function VerifyOTPInner() {
                 maxLength={6}
                 value={otp}
                 onChange={(e) => setOtp(e?.target?.value?.replace(/\D/g, ''))}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-accent focus:border-accent focus:z-10 sm:text-sm text-center text-2xl tracking-widest"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-accent focus:border-accent focus:z-10 sm:text-sm text-center text-2xl tracking-widest"
                 placeholder="000000"
               />
             </div>
@@ -94,8 +94,8 @@ export default function VerifyOTPInner() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white accent-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent disabled:opacity-50"
-              >
+             className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-full shadow-md text-base font-semibold text-white bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] hover:from-[#FF7A3D] hover:to-[#FF6B35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7A3D] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+           >
                 {isLoading ? 'Verifying...' : 'Verify OTP'}
               </button>
             </div>

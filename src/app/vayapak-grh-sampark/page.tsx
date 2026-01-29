@@ -131,9 +131,10 @@ export default function VayapakGrhSamparkForm() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white shadow rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">व्यापक गृह संपर्क अभियान</h1>
+    <div className="min-h-screen bg-gradient-to-b from-[#FF8C42] to-[#FF6B35] py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white rounded-t-3xl shadow-2xl p-6 mt-8">
+          <h1 className="text-3xl font-bold text-[#FF7A3D] mb-6 text-center">व्यापक गृह संपर्क अभियान</h1>
         
         {currentStep === 1 && (
           <EnhancedLocationSelector 
@@ -156,7 +157,7 @@ export default function VayapakGrhSamparkForm() {
                       name="total_villages"
                       value={formData.total_villages}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="कुल ग्राम संख्या दर्ज करें"
                       required
                     />
@@ -169,7 +170,7 @@ export default function VayapakGrhSamparkForm() {
                       name="contacted_villages"
                       value={formData.contacted_villages}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="सम्पर्कित ग्राम संख्या दर्ज करें"
                       required
                     />
@@ -182,7 +183,7 @@ export default function VayapakGrhSamparkForm() {
                       name="distributed_forms"
                       value={formData.distributed_forms}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="वितरित पत्रक संख्या दर्ज करें"
                       required
                     />
@@ -195,7 +196,7 @@ export default function VayapakGrhSamparkForm() {
                       name="distributed_stickers"
                       value={formData.distributed_stickers}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="वितरित स्टीकर संख्या दर्ज करें"
                       required
                     />
@@ -208,7 +209,7 @@ export default function VayapakGrhSamparkForm() {
                       name="book_sales"
                       value={formData.book_sales}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="पुस्तक बिक्री संख्या दर्ज करें"
                       required
                     />
@@ -221,7 +222,7 @@ export default function VayapakGrhSamparkForm() {
                       name="contact_teams"
                       value={formData.contact_teams}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="सहभागी टोली संख्या दर्ज करें"
                       required
                     />
@@ -234,7 +235,7 @@ export default function VayapakGrhSamparkForm() {
                       name="contact_workers"
                       value={formData.contact_workers}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="सहभागी कार्यकर्ता संख्या दर्ज करें"
                       required
                     />
@@ -247,7 +248,7 @@ export default function VayapakGrhSamparkForm() {
                       name="male"
                       value={formData.male}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="पुरुष संख्या दर्ज करें"
                       required
                     />
@@ -260,7 +261,7 @@ export default function VayapakGrhSamparkForm() {
                       name="female"
                       value={formData.female}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="मातृशक्ति संख्या दर्ज करें"
                       required
                     />
@@ -273,7 +274,7 @@ export default function VayapakGrhSamparkForm() {
                       name="yoga"
                       value={formData.yoga}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="योग संख्या दर्ज करें"
                       required
                     />
@@ -286,7 +287,7 @@ export default function VayapakGrhSamparkForm() {
                       name="special_contacts"
                       value={formData.special_contacts}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="विशेष संपर्क संख्या दर्ज करें"
                       required
                     />
@@ -299,7 +300,7 @@ export default function VayapakGrhSamparkForm() {
                       name="swayamsevak_houses"
                       value={formData.swayamsevak_houses}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="स्वयंसेवक घर संख्या दर्ज करें"
                       required
                     />
@@ -312,7 +313,7 @@ export default function VayapakGrhSamparkForm() {
                       name="supporter_houses"
                       value={formData.supporter_houses}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="समर्थक घर संख्या दर्ज करें"
                       required
                     />
@@ -325,7 +326,7 @@ export default function VayapakGrhSamparkForm() {
                       name="neutral_houses"
                       value={formData.neutral_houses}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="तटस्थ घर संख्या दर्ज करें"
                       required
                     />
@@ -338,7 +339,7 @@ export default function VayapakGrhSamparkForm() {
                       name="total_houses"
                       value={formData.total_houses}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="कुल घर संख्या दर्ज करें"
                       required
                     />
@@ -351,7 +352,7 @@ export default function VayapakGrhSamparkForm() {
                       name="contacted_houses"
                       value={formData.contacted_houses}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent focus:border-accent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7A3D] focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="सम्पर्कित घर संख्या दर्ज करें"
                       required
                     />
@@ -362,14 +363,14 @@ export default function VayapakGrhSamparkForm() {
                   <button
                     type="button"
                     onClick={() => setCurrentStep(1)}
-                    className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                   >
                     पीछे
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    className="flex-1 px-6 py-3 bg-gradient-to-r from-[#FF8C42] to-[#FF6B35] text-white rounded-lg hover:from-[#FF7A3D] hover:to-[#FF6B35] disabled:opacity-50 shadow-md font-semibold transition-all duration-200"
                   >
                     {isSubmitting ? 'सहेजा जा रहा है...' : 'सहेजें'}
                   </button>
@@ -378,6 +379,7 @@ export default function VayapakGrhSamparkForm() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
